@@ -1,22 +1,35 @@
-<p>home works!</p>
-<form class="p-5 space-y-3">
+<h1>Angular Template Driven Form example</h1>
+<form #testForm="ngForm" (ngSubmit)="onSubmit(testForm)" class="p-5 space-y-3">
   <div class="form-group">
     <label for="name">Name:</label>
     <div>
-      <input type="text" placeholder="name" class="border rounded-md">
+      <input type="text" name="name" [(ngModel)]="user.name" #nameField="ngModel" required placeholder="name" minlength="5" class="border rounded-md px-3 py-1">
+    </div>
+    <div *ngIf="nameField.invalid && (nameField.touched || testForm.submitted)" class="text-red-600">
+      <p *ngIf="nameField.errors?.['required']">The name is required.</p>
+      <p *ngIf="nameField.errors?.['minlength']">The name must be of 5 characters.</p>
     </div>
   </div>
   <div class="form-group">
     <label for="email">Email:</label>
     <div>
-      <input type="text" placeholder="email" class="border rounded-md">
+      <input type="text" name="email" [(ngModel)]="user.email" required email #emailField="ngModel" placeholder="email" class="border rounded-md px-3 py-1">
+    </div>
+    <div class="text-red-600" *ngIf="emailField.invalid && (emailField.touched || testForm.submitted)">
+      <p *ngIf="emailField.errors?.['required']">The email is required</p>
+      <p *ngIf="emailField.errors?.['email']">The email should be a valid email</p>
     </div>
   </div>
   <div class="form-group">
     <label for="age">Age:</label>
     <div>
-      <input type="text" placeholder="age" class="border rounded-md">
+      <input type="text" name="age" inputmode="numeric" required min=10 [(ngModel)]="user.age" #ageField="ngModel" placeholder="age" class="border rounded-md px-3 py-1">
+    </div>
+    <div class="text-red-600" *ngIf="ageField.invalid && (ageField.touched || testForm.submitted)">
+      <p *ngIf="ageField.errors?.['required']">Age is required</p>
+      <p *ngIf="ageField.errors?.['min']">Age must be greater than 9</p>
     </div>
   </div>
-  <button type="submit" class="bg-blue-400 px-5 py-1 rounded-md mt-4">Submit</button>
+  <button type="submit"
+    class="bg-blue-400 cursor-pointer px-5 py-1 rounded-md mt-4">Submit</button>
 </form>
