@@ -1,0 +1,7 @@
+:host {
+  background: lightblue;
+}
+
+:host ::ng-deep input.ng-invalid {
+  border: 1px solid red;
+}

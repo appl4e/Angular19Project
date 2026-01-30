@@ -1,13 +1,13 @@
 <h1>Reactive form Example</h1>
-<form [formGroup]="userFormGroup" #userForm="ngForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="userFormGroup" #userForm="ngForm" (submit)="onSubmit()">
   <div class="form-group mb-4">
     <label for="name">Name</label>
     <div>
       <input type="text" class="px-3 py-1 border border-blue-300 rounded-lg" formControlName="name">
     </div>
-    <div class="text-red-600" *ngIf="userFormGroup.get('name')?.invalid && (userFormGroup.get('name')?.touched || userForm?.submitted)">
-      <p *ngIf="userFormGroup.get('name')?.errors?.['required']">Name is required.</p>
-      <p *ngIf="userFormGroup.get('name')?.errors?.['minlength']">Name must be 5 characters long.</p>
+    <div class="text-red-600" *ngIf="field['name']?.invalid && (field['name']?.touched || userForm?.submitted)">
+      <p *ngIf="field['name']?.errors?.['required']">Name is required.</p>
+      <p *ngIf="field['name']?.errors?.['minlength']">Name must be 5 characters long.</p>
     </div>
   </div>
   <div class="form-group mb-4">
@@ -15,9 +15,9 @@
     <div>
       <input type="email" class="px-3 py-1 border border-blue-300 rounded-lg" formControlName="email">
     </div>
-    <div class="text-red-600" *ngIf="userFormGroup.get('email')?.invalid && (userFormGroup.get('email')?.touched || userForm?.submitted)">
-      <p *ngIf="userFormGroup.get('email')?.errors?.['required']">Email is required.</p>
-      <p *ngIf="userFormGroup.get('email')?.errors?.['email']">Should be a valid email.</p>
+    <div class="text-red-600" *ngIf="field['email']?.invalid && (field['email']?.touched || userForm?.submitted)">
+      <p *ngIf="field['email']?.errors?.['required']">Email is required.</p>
+      <p *ngIf="field['email']?.errors?.['email']">Should be a valid email.</p>
     </div>
   </div>
   <div class="form-group mb-4">
@@ -25,9 +25,32 @@
     <div>
       <input type="text" class="px-3 py-1 border border-blue-300 rounded-lg" formControlName="age">
     </div>
-    <div class="text-red-600" *ngIf="userFormGroup.get('age')?.invalid && (userFormGroup.get('age')?.touched || userForm?.submitted)">
-      <p *ngIf="userFormGroup.get('age')?.errors?.['required']">Age is required.</p>
-      <p *ngIf="userFormGroup.get('age')?.errors?.['min']">User Must be more than 9 years old.</p>
+    <div class="text-red-600" *ngIf="field['age']?.invalid && (field['age']?.touched || userForm?.submitted)">
+      <p *ngIf="field['age']?.errors?.['required']">Age is required.</p>
+      <p *ngIf="field['age']?.errors?.['min']">User Must be more than 9 years old.</p>
+    </div>
+  </div>
+  <div class="form-group mb-4">
+    <label for="pass">Password</label>
+    <div>
+      <input type="text" class="px-3 py-1 border border-blue-300 rounded-lg" formControlName="password">
+    </div>
+    <div class="text-red-600" *ngIf="field['password']?.invalid && (field['password']?.touched || userForm?.submitted)">
+      <p *ngIf="field['password']?.errors?.['required']">Password is required.</p>
+      <!-- <p *ngIf="field['password']?.errors?.['minlength']">Password must be 5 characters long.</p> -->
+    </div>
+  </div>
+  <div class="form-group mb-4">
+    <label for="confirm_password">Confirm Password</label>
+    <div>
+      <input type="text" class="px-3 py-1 border border-blue-300 rounded-lg" formControlName="confirm_password">
+    </div>
+    <div class="text-red-600" *ngIf="field['confirm_password']?.invalid && (field['confirm_password']?.touched || userForm?.submitted)">
+      <p *ngIf="field['confirm_password']?.errors?.['required']">Confirm password is required.</p>
+      <!-- <p *ngIf="field['confirm_password']?.errors?.['minlength']">Confirm password must be 5 characters long.</p> -->
+    </div>
+    <div class="text-red-600" *ngIf="userFormGroup.errors?.['passwordMismatch']">
+      <p>Passwords should match.</p>
     </div>
   </div>
   <div class="form-group">
